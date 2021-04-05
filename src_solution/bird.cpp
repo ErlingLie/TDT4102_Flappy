@@ -3,7 +3,7 @@
 #include <cmath>
 #include <FL/fl_draw.H>
 
-Bird::Bird() : Fl_Widget(birdPosition, birdPosition*2, 34, 24), stopBird{true} {}
+Bird::Bird() : Fl_Widget(birdPosition, birdPosition*2, 34, 24), stopBird{false} {}
 
 void Bird::draw() {
     if(!stopBird){

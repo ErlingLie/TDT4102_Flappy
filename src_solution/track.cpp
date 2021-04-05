@@ -8,24 +8,10 @@ Fl_PNG_Image Track::background{"../sprites/flappyBirdBackground.png"};
 Fl_PNG_Image Track::base{"../sprites/base.png"};
 
 void Track::draw() {
-    
-    if(score->getScore()%20 < 10){
-        background.draw(0,0, this->w(), this->h());
-    }
-    else {
-        background_night.draw(0,0,this->w(), this->h());
-    }
-    base.draw(0, h() - base.data_h(), this->w(), this->h());
+    background.draw(0,0, this->w(), this->h());
 
-    if(!initialized){
-        initialize_game.draw(w()/2 - initialize_game.data_w()/2, 0);
-        if(Fl::event_key(' ')){
-            initialized = true;
-            bird->initializeGame();
-            score->initialize();
-        }
-        return;
-    }    
+    base.draw(0, h() - base.data_h(), this->w(), this->h());
+   
     if(!gameOver){
         update();    
     } 
@@ -35,19 +21,8 @@ void Track::draw() {
     }
     if(gameOver){
         game_over.draw(this->w()/2 - game_over.data_w()/2, this->h()/2);
-        restart_im.draw(this->w()/2 - restart_im.data_w()/2, 2*this->h()/3);
-        if (Fl::event_key(FL_Enter)){
-            restart();
-        }
-    }    
-}
 
-void Track::restart() {
-    gameOver = false;
-    initialized = false;
-    bird->reset();
-    score->reset();
-    pipes.clear();
+    }    
 }
 
 void Track::update() {
@@ -116,6 +91,6 @@ bool Track::collision() const {
         && ((bird->y() <= top - collisionMargin) || (bird->y() + bird->h() >= bottom + collisionMargin));
 }
 
-Track::Track(int w, int h) : Fl_Widget(0, 0, w, h), ground(h-base.h()), gameOver{false}, initialized{false} {
+Track::Track(int w, int h) : Fl_Widget(0, 0, w, h), ground(h-base.h()), gameOver{false} {
      score = std::make_unique<Score>((w-scoreWidth)/2, 40);
 }

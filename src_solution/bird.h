@@ -17,6 +17,5 @@ private:
 public:
     Bird();
     void setGameOver(){stopBird = true;}
-    void initializeGame(){stopBird = false;}
     void reset();
 };

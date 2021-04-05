@@ -14,7 +14,7 @@ std::array<Fl_PNG_Image, 10> Score::sprites {
     Fl_PNG_Image{"../sprites/9.png"},
 };
 
-Score::Score(int x, int y) : Fl_Widget(x, y, scoreWidth, scoreHeight), initialized{false} {}
+Score::Score(int x, int y) : Fl_Widget(x, y, scoreWidth, scoreHeight) {}
 
 void Score::increment() {
     score++;
@@ -22,9 +22,6 @@ void Score::increment() {
 
 
 void Score::draw() {
-    if(!initialized){
-        return;
-    }
     std::vector<int> digits = getDigits();
     int x = this->x() - scoreWidth*(digits.size() / 2.0);
     for (int digit : digits) {
@@ -47,9 +44,4 @@ std::vector<int> Score::getDigits() {
 
 int Score::getScore() const {
     return score;
-}
-
-void Score::reset() {
-    score = 0;
-    initialized = false;
 }
