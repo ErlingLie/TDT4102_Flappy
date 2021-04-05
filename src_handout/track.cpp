@@ -4,20 +4,12 @@
 #include "constants.h"
 #include "track.h"
 
+//Initialiser bakgrunnsbilder:
+
 
 void Track::draw() {
     //Tegn bakgrunn her
-
-
-    if(!initialized){
-        initialize_game.draw(w()/2 - initialize_game.data_w()/2, 0);
-        if(Fl::event_key(' ')){
-            initialized = true;
-            bird->initializeGame();
-            //score->initialize();
-        }
-        return;
-    }    
+ 
 
     if(!gameOver){
         update();    
@@ -26,20 +18,7 @@ void Track::draw() {
 
     if(gameOver){
         game_over.draw(this->w()/2 - game_over.data_w()/2, this->h()/2);
-        restart_im.draw(this->w()/2 - restart_im.data_w()/2, 2*this->h()/3);
-        if (Fl::event_key(FL_Enter)){
-            restart();
-        }
     }    
-}
-
-
-void Track::restart() {
-    gameOver = false;
-    initialized = false;
-    bird->reset();
-    //score->reset();
-    pipes.clear();
 }
 
 void Track::update() {
@@ -67,7 +46,7 @@ void Track::update() {
 void Track::addPipe() {
     // Adds a pipe every 4*pipeWidth
     static int position = pipeWidth*4;
-    position+= speed;
+    position += speed;
     if (position > pipeWidth * 4) {
         int height = rand() % maxPipeHeight;
         pipes.emplace_back(this->w(), ground, height, pipeGap);
@@ -90,8 +69,6 @@ bool Track::collision() const {
     // Can only collide with first pipe
     const Pipe& pipe = pipes.front();
 
-    // auto [top, bottom] = pipe.getBounds(); // Structured bindings requires C++17
-    // C++14 for de på mac:
     auto bound = pipe.getBounds();
     int top = bound.first;
     int bottom = bound.second;
@@ -104,5 +81,4 @@ Track::Track(int w, int h) :
     Fl_Widget(0, 0, w, h),
     //Endre ground til å være avhengig av base
     ground(h),
-    gameOver{false},
-    initialized{false} {}
+    gameOver{false}{}

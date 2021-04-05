@@ -12,11 +12,8 @@ private:
 
     void draw() override;
     std::vector<int> getDigits();
-    bool initialized;
 public:
     Score(int x, int y);
     void increment();
     int getScore() const;
-    void initialize(){initialized = true;}
-    void reset();
 };

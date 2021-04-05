@@ -45,9 +45,3 @@ std::vector<int> Score::getDigits() {
 int Score::getScore() const {
     return score;
 }
-
-
-void Score::reset() {
-    score = 0;
-    initialized = false;
-}
