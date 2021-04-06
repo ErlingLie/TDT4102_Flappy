@@ -10,7 +10,7 @@ Fl_PNG_Image Track::base{"../sprites/base.png"};
 void Track::draw() {
     background.draw(0,0, this->w(), this->h());
 
-    base.draw(0, h() - base.data_h(), this->w(), this->h());
+    base.draw(0, h() - base.h(), this->w(), this->h());
    
     if(!gameOver){
         update();    

@@ -17,7 +17,6 @@ private:
     void update();
     void addPipe();
     bool collision() const;
-    // void restart();
 
     std::unique_ptr<Bird> bird = std::make_unique<BeautyBird>(' ', "../sprites/bluebird-downflap.png");
     //std::unique_ptr<Bird> bird = std::make_unique<Bird>();
