@@ -56,24 +56,7 @@ void Track::addPipe() {
 
 bool Track::collision() const {
     // Checks if bird has collided with ground or a pipe
-    // Collides with ground
-    if (bird->y() + bird->h() >= ground) {
-        return true;
-    }
-
-    // No pipes to collide with
-    if (!pipes.size()) {
-        return false;
-    }
-
-    // Can only collide with first pipe
-    const Pipe& pipe = pipes.front();
-
-    auto bound = pipe.getBounds();
-    int top = bound.first;
-    int bottom = bound.second;
-    return (bird->x() + bird->w() >= pipe.x() + collisionMargin && bird->x() <= pipe.x() + pipe.w() - collisionMargin)
-        && ((bird->y() <= top - collisionMargin) || (bird->y() + bird->h() >= bottom + collisionMargin));
+    return false;
 }
 
 
